@@ -1,5 +1,4 @@
 ### Hi there 👋
-
 - 🔭 focusing...
 <!-- - 🌱 I’m currently learning vuejs
 - 👯 I’m looking to collaborate on ...
@@ -8,8 +7,10 @@
 - 📫 How to reach me: ...
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ... -->
-
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Talljack&show_icons=true&theme=radical)
+<div>
+  <img height="150em" src="https://github-readme-stats.vercel.app/api?username=Talljack&show_icons=true&layout=compact&hide=stars&count_private=true" alt="XieZongChen's GitHub Stats"/>
+  <img height="150em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Talljack&layout=compact&count_private=true&hide=html" />
+</div>
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=Talljack.visitor-badge)
 
 
