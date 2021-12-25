@@ -13,4 +13,6 @@
 </div>
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=Talljack.visitor-badge)
 
+<!-- [![trophy](https://github-profile-trophy.vercel.app/?username=Talljack&rank=SSS,SS,S,AAA,AA,A&margin-w=8&no-frame=true&no-bg=true)](https://github.com/ryo-ma/github-profile-trophy) -->
+
 
