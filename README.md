@@ -1,5 +1,5 @@
 ### Hi there 👋
-[✉️ &nbsp;Email]:yugang.cao12@gmail.com
+Email:yugang.cao12@gmail.com
 
 - 🔭 focusing...
 - 🌱 I am a contributor of naive-ui
