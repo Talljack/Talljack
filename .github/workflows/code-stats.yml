@@ -1,0 +1,39 @@
+name: Generate Codes Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天运行一次
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install axios moment
+
+    - name: Run script
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
+      run: node code-stats.js
+
+    # 可选步骤：更新 README.md
+    # - name: Update README
+    #   run: ' 更新 README.md 的命令'
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git commit -m "Update Codes stats" -a || exit 0
+        git push
