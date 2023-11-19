@@ -1,12 +1,6 @@
-const axios = require("axios");
 const fs = require("fs");
 const { Octokit, App } = require("octokit");
 const moment = require("moment");
-
-async function getUsername() {
-  const response = await octokit.request('GET /user')
-  return response.data.login; // 这里 'login' 是用户名
-}
 
 const octokit = new Octokit({
   auth: process.env.TOKEN,
@@ -64,21 +58,22 @@ async function getUserCommits(username, startDate, endDate) {
 }
 
 // 更新 README.md 的函数
-function updateReadme(dailyCodeChanges) {
-  const readmePath = "/README.md";
+function updateReadme(dailyInfo) {
+  const readmePath = "README.md";
   let readmeContent = "";
 
   // 尝试读取现有的 README.md 内容
   if (fs.existsSync(readmePath)) {
-    readmeContent = fs.readFileSync(readmePath, "utf8");
+    // readmeContent = fs.readFileSync(readmePath, "utf8");
+    readmeContent = fs.readFileSync(readmePath, "utf8")
   }
   console.log('readmeContent', readmeContent)
   // 构建新的统计数据部分
-  let statsContent = "## Daily Code Statistics\n\n";
+  let statsContent = `## ${dailyInfo.username} Daily Code Statistics\n\n`;
   statsContent += "| Date       | Addition Codes | Deletion Codes |\n";
   statsContent += "|------------|-----------|-----------|\n";
 
-  Object.entries(dailyCodeChanges).forEach(([date, stats]) => {
+  Object.entries(dailyInfo.dailyCodeChanges).forEach(([date, stats]) => {
     statsContent += `| ${date} | ${stats.additions} | ${stats.deletions} |\n`;
   });
 
@@ -109,14 +104,13 @@ function updateReadme(dailyCodeChanges) {
 
 // 主函数
 async function main() {
-  // const user = await getUsername()
   const user = process.env.GITHUB_ACTOR;
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
   const userCommits = await getUserCommits(user, START_DATE, END_DATE);
   console.log('results', userCommits)
   // 格式化输出并更新 README.md
-  updateReadme(userCommits);
+  updateReadme();
 }
 
 main();
