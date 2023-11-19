@@ -25,11 +25,12 @@ async function getUserCommits(username, startDate, endDate) {
     let page = 1;
     let keepGoing = true;
     let dailyCodeChanges = {};
-
+    console.log('xxxx', username, startDate, endDate)
     while (keepGoing) {
       const response = await githubAxios.get(
         `/users/${username}/events?page=${page}`
       );
+      console.log('xxxx', response.data)
       for (let event of response.data) {
         if (event.type === "PushEvent") {
           let eventDate = moment(event.created_at);
@@ -39,7 +40,10 @@ async function getUserCommits(username, startDate, endDate) {
               const commitData = await githubAxios.get(
                 `/repos/${event.repo.name}/commits/${commit.sha}`
               );
+              console.log('xxxx', commitData.data)
               const stats = commitData.data.stats;
+              console.log('xxxx', stats)
+              console.log('xxxx', dailyCodeChanges[dateStr])
               if (!dailyCodeChanges[dateStr]) {
                 dailyCodeChanges[dateStr] = { additions: 0, deletions: 0 };
               }
@@ -113,14 +117,10 @@ function updateReadme(dailyCodeChanges) {
 
 // 主函数
 async function main() {
-  console.log('TOKEN', GITHUB_TOKEN)
-  console.log('process', process.env)
+
   // const user = await getUsername()
-  console.log('user', process.env.GITHUB_ACTOR)
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
-  console.log('START_DATE', START_DATE)
-  console.log('END_DATE', END_DATE)
   const userCommits = await getUserCommits(user, START_DATE, END_DATE);
   console.log('xxxx', userCommits)
   // 格式化输出并更新 README.md
