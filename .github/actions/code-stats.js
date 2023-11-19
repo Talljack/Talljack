@@ -4,22 +4,10 @@ const { Octokit, App } = require("octokit");
 const moment = require("moment");
 
 async function getUsername() {
-  // const response = await githubAxios.get("https://api.github.com/user");
   const response = await octokit.request('GET /user')
   return response.data.login; // 这里 'login' 是用户名
 }
 
-// const GITHUB_TOKEN =
-//   "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";
-// const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-// 配置 axios 实例
-// const githubAxios = axios.create({
-//   baseURL: "https://api.github.com/",
-//   headers: {
-//     Authorization: `token ${GITHUB_TOKEN}`,
-//     Accept: "application/vnd.github.v3+json",
-//   },
-// });
 const octokit = new Octokit({
   auth: process.env.TOKEN,
 });
@@ -32,32 +20,22 @@ async function getUserCommits(username, startDate, endDate) {
     let dailyCodeChanges = {};
     console.log('xxxx', username, startDate, endDate)
     while (keepGoing) {
-      // const response = await githubAxios.get(
-      //   `/users/${username}/events?page=${page}`
-      // );
       const response = await octokit.request('GET /users/{username}/events', {
         username,
         page
       })
-      console.log('xxxx', response.data)
       for (let event of response.data) {
         if (event.type === "PushEvent") {
           let eventDate = moment(event.created_at);
           if (eventDate.isBetween(startDate, endDate, "day", "[]")) {
             const dateStr = eventDate.format("YYYY-MM-DD");
             for (let commit of event.payload.commits) {
-              // const commitData = await githubAxios.get(
-              //   `/repos/${event.repo.name}/commits/${commit.sha}`
-              // );
               const commitData = await octokit.request('GET /repos/{owner}/{repo}/commits/{ref}', {
                 owner: event.repo.name.split('/')[0],
                 repo: event.repo.name.split('/')[1],
                 ref: commit.sha
               })
-              console.log('xxxx', commitData.data)
               const stats = commitData.data.stats;
-              console.log('xxxx', stats)
-              console.log('xxxx', dailyCodeChanges[dateStr])
               if (!dailyCodeChanges[dateStr]) {
                 dailyCodeChanges[dateStr] = { additions: 0, deletions: 0 };
               }
@@ -87,14 +65,14 @@ async function getUserCommits(username, startDate, endDate) {
 
 // 更新 README.md 的函数
 function updateReadme(dailyCodeChanges) {
-  const readmePath = "./README.md";
+  const readmePath = "/README.md";
   let readmeContent = "";
 
   // 尝试读取现有的 README.md 内容
   if (fs.existsSync(readmePath)) {
     readmeContent = fs.readFileSync(readmePath, "utf8");
   }
-
+  console.log('readmeContent', readmeContent)
   // 构建新的统计数据部分
   let statsContent = "## Daily Code Statistics\n\n";
   statsContent += "| Date       | Addition Codes | Deletion Codes |\n";
@@ -124,21 +102,18 @@ function updateReadme(dailyCodeChanges) {
     readmeContent +=
       "\n" + startMarker + "\n\n" + statsContent + "\n" + endMarker;
   }
-
+  console.log('readmeContent11111', readmeContent)
   // 写入更新后的内容
   fs.writeFileSync(readmePath, readmeContent, "utf8");
 }
 
 // 主函数
 async function main() {
-
-  // const user = await getUsername()
+  const user = await getUsername()
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
-  console.log('START_DATE', START_DATE)
-  console.log('END_DATE', END_DATE)
   const userCommits = await getUserCommits(user, START_DATE, END_DATE);
-  console.log('xxxx', userCommits)
+  console.log('results', userCommits)
   // 格式化输出并更新 README.md
   updateReadme(userCommits);
 }
