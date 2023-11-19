@@ -21,11 +21,13 @@ jobs:
 
     - name: Install dependencies
       run: npm install axios moment
+      working-directory: .github/actions
 
     - name: Run script
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
       run: node code-stats.js
+      working-directory: .github/actions
 
     # 可选步骤：更新 README.md
     # - name: Update README
