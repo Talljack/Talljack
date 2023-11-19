@@ -25,7 +25,7 @@ jobs:
 
     - name: Run script
       run: |
-        npm install axios moment octokit
+        npm install fs-extra moment octokit
         node .github/actions/code-stats.js
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
