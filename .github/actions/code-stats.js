@@ -1,7 +1,6 @@
-// console.log("Hello via Bun!");
-import axios from "axios";
-import { writeFile } from "fs/promises";
-import moment from "moment";
+const axios = require("axios");
+const fs = require("fs");
+const moment = require("moment");
 
 async function getUsername(githubToken) {
   const response = await axios.get("https://api.github.com/user", {
