@@ -8,7 +8,7 @@ on:
       - main  # 仅在 main 分支发生变化时运行
 
 permissions:
-    contents: read
+    contents: write
     issues: write
 
 jobs:
