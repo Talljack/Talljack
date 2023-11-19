@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { Octokit, App } = require("octokit");
+const { Octokit } = require("octokit");
 const moment = require("moment");
 
 const octokit = new Octokit({
