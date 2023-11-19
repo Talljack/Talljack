@@ -29,3 +29,23 @@ jobs:
         node .github/actions/code-stats.js
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
+
+    - name: Commit files
+      id: commit-files
+      run: |
+        if [ -n "$(git status --porcelain README.md)" ]; then
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Update README.md"
+          echo "hasChange=true" >> $GITHUB_OUTPUT
+        else
+          echo "No Changes"
+        fi
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      if: ${{ steps.commit-files.outputs.hasChange == 'true' }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
