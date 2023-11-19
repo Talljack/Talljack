@@ -1,11 +1,17 @@
 const axios = require("axios");
 const fs = require("fs");
-const { Octokit, App } = require("octokit");
+const { Octokit } = require("octokit");
 const moment = require("moment");
 
-async function getUsername() {
-  const response = await octokit.request('GET /user')
-  return response.data.login; // 这里 'login' 是用户名
+
+async function getCurrentUser() {
+  try {
+    const response = await octokit.rest.users.getAuthenticated();
+    return response.data.login; // 返回用户名
+  } catch (error) {
+    console.error("Error fetching user: ", error);
+    return null;
+  }
 }
 
 const octokit = new Octokit({
@@ -109,7 +115,7 @@ function updateReadme(dailyCodeChanges) {
 
 // 主函数
 async function main() {
-  const user = await getUsername()
+  const user = await getCurrentUser()
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
   const userCommits = await getUserCommits(user, START_DATE, END_DATE);
