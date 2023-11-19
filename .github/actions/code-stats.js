@@ -115,10 +115,12 @@ function updateReadme(dailyCodeChanges) {
 async function main() {
   console.log('TOKEN', GITHUB_TOKEN)
   console.log('process', process.env)
-  const user = await getUsername()
-  console.log('user', user)
+  // const user = await getUsername()
+  console.log('user', process.env.GITHUB_ACTOR)
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
+  console.log('START_DATE', START_DATE)
+  console.log('END_DATE', END_DATE)
   const userCommits = await getUserCommits(user, START_DATE, END_DATE);
   console.log('xxxx', userCommits)
   // 格式化输出并更新 README.md
