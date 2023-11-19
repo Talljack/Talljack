@@ -7,6 +7,10 @@ on:
     branches:
       - main  # 仅在 main 分支发生变化时运行
 
+permissions:
+    contents: read
+    issues: write
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
@@ -24,10 +28,10 @@ jobs:
       working-directory: .github/actions
 
     - name: Run script
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
       run: node code-stats.js
       working-directory: .github/actions
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
 
     # 可选步骤：更新 README.md
     # - name: Update README
