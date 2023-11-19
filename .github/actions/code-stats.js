@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const { Octokit } = require("octokit");
 const moment = require("moment");
 
@@ -58,13 +58,13 @@ async function getUserCommits(username, startDate, endDate) {
 }
 
 // 更新 README.md 的函数
-function updateReadme(dailyInfo) {
+async function updateReadme(dailyInfo) {
   const readmePath = "README.md";
   let readmeContent = "";
 
   // 尝试读取现有的 README.md 内容
   if (fs.existsSync(readmePath)) {
-    readmeContent = fs.readFileSync(readmePath, "utf8")
+    readmeContent = await fs.readFile(readmePath, "utf8")
   }
   // 构建新的统计数据部分
   let statsContent = `## ${dailyInfo.username} Daily Code Statistics\n\n`;
@@ -98,7 +98,7 @@ function updateReadme(dailyInfo) {
   console.log('changed', readmeContent)
   // 写入更新后的内容
   try {
-    fs.writeFileSync(readmePath, readmeContent, "utf8");
+    await fs.writeFile(readmePath, readmeContent, "utf8");
   } catch (error) {
     console.error("Error writing to README.md:", error);
   }
