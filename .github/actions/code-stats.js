@@ -8,7 +8,7 @@ async function getUsername() {
 }
 
 const GITHUB_TOKEN =
-  "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";
+  "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";
 // const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 // 配置 axios 实例
 const githubAxios = axios.create({
