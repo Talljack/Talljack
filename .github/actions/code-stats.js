@@ -6,6 +6,7 @@ async function getUsername(githubToken) {
   const response = await axios.get("https://api.github.com/user", {
     headers: {
       Authorization: `token ${githubToken}`,
+      Accept: "application/vnd.github.v3+json",
     },
   });
   return response.data.login; // 这里 'login' 是用户名
@@ -118,11 +119,13 @@ function updateReadme(dailyCodeChanges) {
 
 // 主函数
 async function main() {
-  let results = [];
+  console.log('token', token)
   const user = await getUsername(GITHUB_TOKEN)
+  console.log('user', user)
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
   const userCommits = await getUserCommits(user, START_DATE, END_DATE);
+  console.log('xxxx', userCommits)
   // 格式化输出并更新 README.md
   updateReadme(userCommits);
 }
