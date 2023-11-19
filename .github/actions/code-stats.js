@@ -67,7 +67,6 @@ function updateReadme(dailyInfo) {
     // readmeContent = fs.readFileSync(readmePath, "utf8");
     readmeContent = fs.readFileSync(readmePath, "utf8")
   }
-  console.log('readmeContent', readmeContent)
   // 构建新的统计数据部分
   let statsContent = `## ${dailyInfo.username} Daily Code Statistics\n\n`;
   statsContent += "| Date       | Addition Codes | Deletion Codes |\n";
@@ -97,7 +96,6 @@ function updateReadme(dailyInfo) {
     readmeContent +=
       "\n" + startMarker + "\n\n" + statsContent + "\n" + endMarker;
   }
-  console.log('readmeContent11111', readmeContent)
   // 写入更新后的内容
   fs.writeFileSync(readmePath, readmeContent, "utf8");
 }
@@ -107,10 +105,9 @@ async function main() {
   const user = process.env.GITHUB_ACTOR;
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
-  const userCommits = await getUserCommits(user, START_DATE, END_DATE);
-  console.log('results', userCommits)
+  const dailyInfo = await getUserCommits(user, START_DATE, END_DATE);
   // 格式化输出并更新 README.md
-  updateReadme();
+  updateReadme(dailyInfo);
 }
 
 main();
