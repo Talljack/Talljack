@@ -64,7 +64,6 @@ function updateReadme(dailyInfo) {
 
   // 尝试读取现有的 README.md 内容
   if (fs.existsSync(readmePath)) {
-    // readmeContent = fs.readFileSync(readmePath, "utf8");
     readmeContent = fs.readFileSync(readmePath, "utf8")
   }
   // 构建新的统计数据部分
@@ -96,6 +95,7 @@ function updateReadme(dailyInfo) {
     readmeContent +=
       "\n" + startMarker + "\n\n" + statsContent + "\n" + endMarker;
   }
+  console.log('changed', readmeContent)
   // 写入更新后的内容
   fs.writeFileSync(readmePath, readmeContent, "utf8");
 }
