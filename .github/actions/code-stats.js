@@ -2,21 +2,14 @@ const axios = require("axios");
 const fs = require("fs");
 const moment = require("moment");
 
-async function getUsername(githubToken) {
-  const response = await axios.get("https://api.github.com/user", {
-    headers: {
-      Authorization: `token ${githubToken}`,
-      Accept: "Accept: application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28"
-    },
-  });
+async function getUsername() {
+  const response = await githubAxios.get("https://api.github.com/user");
   return response.data.login; // 这里 'login' 是用户名
 }
 
-// const GITHUB_TOKEN =
-//   "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";
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const USERS = ["Talljack"];
+const GITHUB_TOKEN =
+  "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";
+// const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 // 配置 axios 实例
 const githubAxios = axios.create({
   baseURL: "https://api.github.com/",
@@ -120,8 +113,9 @@ function updateReadme(dailyCodeChanges) {
 
 // 主函数
 async function main() {
-  console.log('token', token)
-  const user = await getUsername(GITHUB_TOKEN)
+  console.log('TOKEN', GITHUB_TOKEN)
+  console.log('process', process.env)
+  const user = await getUsername()
   console.log('user', user)
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
