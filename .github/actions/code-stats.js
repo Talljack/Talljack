@@ -1,22 +1,27 @@
 const axios = require("axios");
 const fs = require("fs");
+const { Octokit, App } = require("octokit");
 const moment = require("moment");
 
 async function getUsername() {
-  const response = await githubAxios.get("https://api.github.com/user");
+  // const response = await githubAxios.get("https://api.github.com/user");
+  const response = await octokit.request('GET /user')
   return response.data.login; // 这里 'login' 是用户名
 }
 
-const GITHUB_TOKEN =
-  "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";
+// const GITHUB_TOKEN =
+//   "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";
 // const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 // 配置 axios 实例
-const githubAxios = axios.create({
-  baseURL: "https://api.github.com/",
-  headers: {
-    Authorization: `token ${GITHUB_TOKEN}`,
-    Accept: "application/vnd.github.v3+json",
-  },
+// const githubAxios = axios.create({
+//   baseURL: "https://api.github.com/",
+//   headers: {
+//     Authorization: `token ${GITHUB_TOKEN}`,
+//     Accept: "application/vnd.github.v3+json",
+//   },
+// });
+const octokit = new Octokit({
+  auth: process.env.TOKEN,
 });
 
 // 获取用户在特定日期范围内的提交事件
@@ -27,9 +32,13 @@ async function getUserCommits(username, startDate, endDate) {
     let dailyCodeChanges = {};
     console.log('xxxx', username, startDate, endDate)
     while (keepGoing) {
-      const response = await githubAxios.get(
-        `/users/${username}/events?page=${page}`
-      );
+      // const response = await githubAxios.get(
+      //   `/users/${username}/events?page=${page}`
+      // );
+      const response = await octokit.request('GET /users/{username}/events', {
+        username,
+        page
+      })
       console.log('xxxx', response.data)
       for (let event of response.data) {
         if (event.type === "PushEvent") {
@@ -37,9 +46,14 @@ async function getUserCommits(username, startDate, endDate) {
           if (eventDate.isBetween(startDate, endDate, "day", "[]")) {
             const dateStr = eventDate.format("YYYY-MM-DD");
             for (let commit of event.payload.commits) {
-              const commitData = await githubAxios.get(
-                `/repos/${event.repo.name}/commits/${commit.sha}`
-              );
+              // const commitData = await githubAxios.get(
+              //   `/repos/${event.repo.name}/commits/${commit.sha}`
+              // );
+              const commitData = await octokit.request('GET /repos/{owner}/{repo}/commits/{ref}', {
+                owner: event.repo.name.split('/')[0],
+                repo: event.repo.name.split('/')[1],
+                ref: commit.sha
+              })
               console.log('xxxx', commitData.data)
               const stats = commitData.data.stats;
               console.log('xxxx', stats)
