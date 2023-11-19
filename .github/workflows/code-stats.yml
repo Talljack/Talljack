@@ -23,26 +23,9 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
-      run: npm install axios moment
-      working-directory: .github/actions
-
     - name: Run script
-      run: node code-stats.js
-      working-directory: .github/actions
+      run: |
+        npm install axios moment octokit
+        node .github/actions/code-stats.js
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
-
-    # 可选步骤：更新 README.md
-    # - name: Update README
-    #   run: ' 更新 README.md 的命令'
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Commit and push if changed
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add -A
-        git commit -m "Update Codes stats" -a || exit 0
-        git push
