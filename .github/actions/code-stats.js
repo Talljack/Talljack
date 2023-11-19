@@ -119,6 +119,7 @@ function updateReadme(dailyCodeChanges) {
 async function main() {
 
   // const user = await getUsername()
+  const user = process.env.GITHUB_ACTOR;
   const START_DATE =  moment().subtract(1, 'days').format('YYYY-MM-DD');
   const END_DATE = moment().subtract(1, 'days').format('YYYY-MM-DD');
   const userCommits = await getUserCommits(user, START_DATE, END_DATE);
