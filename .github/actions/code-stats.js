@@ -97,7 +97,11 @@ function updateReadme(dailyInfo) {
   }
   console.log('changed', readmeContent)
   // 写入更新后的内容
-  fs.writeFileSync(readmePath, readmeContent, "utf8");
+  try {
+    fs.writeFileSync(readmePath, readmeContent, "utf8");
+  } catch (error) {
+    console.error("Error writing to README.md:", error);
+  }
 }
 
 // 主函数
