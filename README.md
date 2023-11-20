@@ -49,8 +49,8 @@
 </p>
 
 <div>
-  <img height="150em" src="https://github-readme-stats.vercel.app/api?username=Talljack&show_icons=true&layout=compact&hide=stars&count_private=true" alt="caoyugang's GitHub Stats"/>
-  <img height="150em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Talljack&layout=compact&count_private=true&hide=html" />
+  <img height="200em" src="https://github-readme-stats.vercel.app/api?username=Talljack&show_icons=true&layout=compact&hide=stars&count_private=true" alt="caoyugang's GitHub Stats"/>
+  <img height="200em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Talljack&layout=compact&count_private=true&hide=html" />
 </div>
 
 ## Projects
