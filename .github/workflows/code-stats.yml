@@ -24,11 +24,9 @@ jobs:
         node-version: '18'
 
     - name: Run script
-      run: |
-        npm install fs-extra moment octokit
-        node .github/actions/code-stats.js
+      uses: "Talljack/daily-code-stats@main"
       env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
+        token: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
 
     - name: Commit files
       id: commit-files
