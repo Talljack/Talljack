@@ -12,7 +12,7 @@ permissions:
     issues: write
 
 jobs:
-  update-readme:
+  update-code-stats:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
