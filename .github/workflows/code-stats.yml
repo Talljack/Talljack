@@ -17,6 +17,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        token: ${{secrets.PERSONAL_ACCESS_TOKEN}}  # 使用 PAT 以访问完整的提交历史
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -25,9 +27,8 @@ jobs:
 
     - name: Daily Codes Stats
       uses: Talljack/daily-code-stats@main
-
       env:
-        token: ${{secrets.GITHUB_TOKEN}}  # 使用存储在仓库 Secrets 中的 GitHub 令牌
+        token: ${{secrets.PERSONAL_ACCESS_TOKEN}}  # 使用 PAT 以访问 private repos
 
     - name: Commit files
       id: commit-files
@@ -46,5 +47,5 @@ jobs:
       uses: ad-m/github-push-action@master
       if: ${{ steps.commit-files.outputs.hasChange == 'true' }}
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         branch: ${{ github.ref }}
