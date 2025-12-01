@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main  # 仅在 main 分支发生变化时运行
+  workflow_dispatch:  # 允许手动触发
 
 permissions:
     contents: write
