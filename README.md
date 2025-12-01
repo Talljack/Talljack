@@ -48,10 +48,17 @@
 /></a>
 </p>
 
-<a href="https://github.com/Talljack">
-  <img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Talljack&theme=tokyonight" alt="Talljack's GitHub Stats"/>
-  <img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Talljack&theme=tokyonight" alt="Talljack's GitHub Summary"/>
-</a>
+<p align="center">
+  <a href="https://github.com/Talljack">
+    <img height="160em" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Talljack&theme=tokyonight" alt="Talljack's GitHub Stats"/>
+    <img height="160em" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Talljack&theme=tokyonight&utcOffset=8" alt="Talljack's Productive Time"/>
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/Talljack">
+    <img width="100%" src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Talljack&theme=tokyonight" alt="Talljack's GitHub Summary"/>
+  </a>
+</p>
 
 ## AI & MCP Projects
 | &nbsp; | project | description | stars | last commit |
