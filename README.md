@@ -94,3 +94,13 @@ A native, keyboard-first menu bar manager built with Swift 6, SwiftUI, and AppKi
   <strong>Building something useful for developers or language learners?</strong><br />
   <a href="https://talljack.me/about">Let’s compare notes →</a>
 </p>
+
+<!-- START_STATS -->
+
+## Talljack Daily Code Statistics
+
+| Date       | Addition Codes | Deletion Codes |
+|------------|-----------|-----------|
+| 2026-09-16 | 13480 | 3385 |
+
+<!-- END_STATS -->
