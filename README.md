@@ -82,12 +82,6 @@ A native, keyboard-first menu bar manager built with Swift 6, SwiftUI, and AppKi
 
 `TypeScript` · `React` · `Next.js` · `Vue` · `Node.js` · `Swift` · `SwiftUI` · `Rust` · `Tauri` · `Python` · `MCP`
 
-<p align="center">
-  <a href="https://github.com/Talljack">
-    <img width="100%" src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Talljack&theme=github_dark" alt="Talljack's GitHub contribution summary" />
-  </a>
-</p>
-
 ---
 
 <p align="center">
