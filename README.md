@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://talljack.me">Website</a> ·
   <a href="https://echo-type.app">Try EchoType</a> ·
-  <a href="https://www.wheremymoney.pro">Try WhereMyMoney</a> ·
+  <a href="https://my-subscriptions.vercel.app">Try WhereMyMoney</a> ·
   <a href="https://github.com/Talljack?tab=repositories">Open source</a> ·
   <a href="https://x.com/Talljackcv">Follow on X</a>
 </p>
@@ -33,7 +33,7 @@ One learning workspace for listening, speaking, reading, and writing. Import an 
 
 A subscription intelligence workspace for tracking recurring services, renewal dates, and multi-currency spending in one place. Reminders, visual analytics, annual reports, and an AI financial assistant make hidden recurring costs easier to understand and act on.
 
-[**Open WhereMyMoney →**](https://www.wheremymoney.pro) &nbsp; [**Join the community →**](https://github.com/Talljack/subscription-manage-community)
+[**Open WhereMyMoney →**](https://my-subscriptions.vercel.app) &nbsp; [**Join the community →**](https://github.com/Talljack/subscription-manage-community)
 
 `Next.js` `PostgreSQL` `Drizzle ORM` `Stripe` `Resend` `AI Assistant`
 
