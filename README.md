@@ -95,6 +95,6 @@ A native, keyboard-first menu bar manager built with Swift 6, SwiftUI, and AppKi
 
 | Date       | Addition Codes | Deletion Codes |
 |------------|-----------|-----------|
-| 2026-09-26 | 1 | 1 |
+| 2026-09-27 | 199 | 32 |
 
 <!-- END_STATS -->
